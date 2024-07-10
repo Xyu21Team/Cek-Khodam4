@@ -57,6 +57,59 @@ document.getElementById('checkButton').addEventListener('click', function() {
     'Himawari Uzumaki','Bulu jembut','Upin','IPIN','TOK DALANG'
     ];
 
+function generateKhodamDescription(name, khodamterdeteksi) {
+  var promptText =
+    "Jelaskan khodam " +
+    khodamterdeteksi +
+    " dalam Bahasa indonesia hanya 15 kata saja menggunakan lelucon dan berikan arti yang terlihat meyakinkan dengan mengaitkannya pada karakteristik hewan atau makhluk astral yang terkait dari nama " +
+    name +
+    ", contohnya jika khodamnya adalah Khodam kadal sakti maka contoh jawabanya kamu suka bersembunyi dengan cepat dan sangat lincah memikat hati wanita.";
+
+  Swal.fire({
+    title: "Mohon Tunggu...",
+    html: "Meminta bantuan dari alam gaib untuk mencari informasi tentang khodam Anda...",
+    allowOutsideClick: false,
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  });
+
+  axios
+    .post(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        messages: [
+          {
+            role: "user",
+            content: promptText,
+          },
+        ],
+        model: "mixtral-8x7b-32768",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer ",
+        },
+      }
+    )
+    .then(function (response) {
+      var khodamDescription = response.data.choices[0].message.content.trim();
+      khodamData[name] = {
+        khodamName: khodamName,
+        khodamDescription: khodamDescription,
+      };
+      
+    })
+    .catch(function (error) {
+      Swal.fire("Oops...", "Terjadi kesalahan saat meminta bantuan dari alam gaib. Silakan coba lagi nanti.", "error");
+    });
+}
+
+
+    
+
     if (birthDate) {
         const khodamIndex = parseInt(birthDate.replace(/-/g, '').slice(4, 8), 10) % khodams.length;
         const khodamTerdeteksi = khodams[khodamIndex];
@@ -75,7 +128,7 @@ document.getElementById('checkButton').addEventListener('click', function() {
         const khodamTerdeteksi = khodams[randomIndex];
 
         pesan = [
-            `Ya, ${name}, di dalam dirimu ada khodam ${khodamTerdeteksi}.`,
+            `Ya, ${name}, di dalam dirimu ada khodam ${khodamTerdeteksi} ${khodamDescription}.`,
             `Tidak, ${name}, tidak ada khodam di dalam dirimu.`,
             `Khodam ${khodamTerdeteksi} sedang bersemayam di dalam dirimu, ${name}.`,
             `Kamu bersih dari khodam, ${name}.`,
