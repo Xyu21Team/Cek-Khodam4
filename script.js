@@ -69,9 +69,7 @@ document.getElementById('checkButton').addEventListener('click', function() {
             `Ya, ${name}, menurut tanggal lahir Anda, di dalam dirimu ada khodam ${khodamTerdeteksi}.`,
             `Tidak, ${name}, menurut tanggal lahir Anda, tidak ada khodam di dalam dirimu.`,
             `Menurut tanggal lahir Anda, khodam ${khodamTerdeteksi} sedang bersemayam di dalam dirimu, ${name}.`,
-            `Menurut tanggal lahir Anda, kamu bersih dari khodam, ${name}.`,
             `Menurut tanggal lahir Anda, khodam ${khodamTerdeteksi} berada di dalam dirimu, ${name}, jaga baik-baik!`,
-            `Khodam ${khodamTerdeteksi} berada di dalam dirimu, ${name}, TAPI BOONG !`,
             `Tidak dapat mendeteksi khodam di dalam dirimu menurut tanggal lahir Anda, ${name}. Coba lagi.`
         ];
     } else {
@@ -82,9 +80,7 @@ document.getElementById('checkButton').addEventListener('click', function() {
             `Ya, ${name}, di dalam dirimu ada khodam ${khodamTerdeteksi}.`,
             `Tidak, ${name}, tidak ada khodam di dalam dirimu.`,
             `Khodam ${khodamTerdeteksi} sedang bersemayam di dalam dirimu, ${name}.`,
-            `Kamu bersih dari khodam, ${name}.`,
             `Khodam ${khodamTerdeteksi} berada di dalam dirimu, ${name}, jaga baik-baik!`,
-            `Khodam ${khodamTerdeteksi} berada di dalam dirimu, ${name}, TAPI BOONG !`,
             `Tidak dapat mendeteksi khodam di dalam dirimu, ${name}. Coba lagi.`
         ];
     }
